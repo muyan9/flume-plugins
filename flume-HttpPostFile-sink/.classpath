@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="lib/flume-ng-configuration-1.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/flume-ng-core-1.9.0.jar" sourcepath="D:/dev/java_source/apache-flume-1.9.0-src"/>
+	<classpathentry kind="lib" path="lib/flume-ng-sdk-1.9.0.jar" sourcepath="D:/dev/java_source/apache-flume-1.9.0-src/apache-flume-1.9.0-src.zip"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/guava-11.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/postgresql-42.2.5.jar"/>
+	<classpathentry kind="lib" path="lib/fastjson-1.2.72.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
