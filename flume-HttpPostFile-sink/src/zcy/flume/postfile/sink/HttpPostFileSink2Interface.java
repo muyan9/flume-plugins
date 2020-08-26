@@ -2,6 +2,7 @@ package zcy.flume.postfile.sink;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,6 +74,7 @@ public class HttpPostFileSink2Interface extends AbstractSink implements Configur
 					result = Status.BACKOFF;
 					break;
 				}
+				//在内存中解压缩zip文件，返回“文件名=文件二进制内容”的键值对字典
 				HashMap<String, byte[]> hmFileContent = unZip(content);
 				for(Entry<String, byte[]> entry : hmFileContent.entrySet()) {
 					String key = entry.getKey();
@@ -81,6 +83,7 @@ public class HttpPostFileSink2Interface extends AbstractSink implements Configur
 					String sFileName = ss[ss.length-1];
 					byte[] value = entry.getValue();
 					//String url, String sDomainMD5, String sFileName, byte[] contents
+					// 利用http接口上传到hbase存储中
 					JSONObject object = this.postFile(sDomainMD5, sFileName, value);
 					int statusCode = object.getIntValue("statusCode");
 					if(statusCode!=200) {
@@ -113,22 +116,34 @@ public class HttpPostFileSink2Interface extends AbstractSink implements Configur
 		try {
 			InputStream is = new ByteArrayInputStream(bs);
 			ZipInputStream zipis = new ZipInputStream(is);
-			ZipEntry entry;
+			
+			ZipEntry entry = null;
 			HashMap<String, byte[]> hmFileContent = new HashMap<String, byte[]>();
+			// 定义读缓存
+			byte doc[] = null;
+			// 遍历zip文件中对象
 			while((entry = zipis.getNextEntry()) != null) {
 				if(entry.isDirectory()) {
 					continue;
 				}
 				String fname = entry.getName();
-				
-				long l = entry.getSize();
-				byte[] content = new byte[(int) l];
-				zipis.read(content);
-				
 				if(fname.endsWith(".json")) {
 					continue;
 				}
-				hmFileContent.put(fname, content);
+				
+				int l = (int) entry.getSize();
+				ByteArrayOutputStream out = new ByteArrayOutputStream(l);
+                doc=new byte[512];
+                int n;
+                //若没有读到，即读取到末尾，则返回-1
+                while((n=zipis.read(doc,0,512))!=-1)
+                {
+                    //这就把读取到的n个字节全部都写入到指定路径了
+                    out.write(doc,0,n);
+//                    System.out.println(n);
+                }
+                hmFileContent.put(fname, out.toByteArray());
+                out.close();
 			}
 			
 			return hmFileContent;
