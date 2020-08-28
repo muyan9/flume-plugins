@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="lib/jetty-servlets-9.4.18.v20190429.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-servlet-9.4.18.v20190429.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-server-9.4.18.v20190429.jar"/>
+	<classpathentry kind="lib" path="lib/flume-ng-hbase2-sink-1.9.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
