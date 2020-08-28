@@ -69,7 +69,7 @@ public class HttpSourcePostFileHanlder implements HTTPSourceHandler {
                     out.write(doc,0,n);
                 }
                 byte[] bb = out.toByteArray();
-                LOG.warn(md5(bb));
+//                LOG.debug(md5(bb));
 			    events.add(EventBuilder.withBody(bb));
 			}
 		}else {

@@ -1,0 +1,5 @@
+该插件时自定义的httpsource的handler，用于接收multipart形式的post文件，处理文件上传
+
+可接收多个文件同时上传
+
+每个文件作为一个单独的event进入channel
