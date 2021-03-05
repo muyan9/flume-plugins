@@ -5,27 +5,32 @@ import java.io.InputStream;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import org.apache.flume.Context;
 import org.apache.flume.Event;
+import org.apache.flume.conf.Configurable;
 import org.apache.flume.event.EventBuilder;
-import org.apache.flume.source.SpoolDirectorySource;
+import org.apache.flume.source.AbstractSource;
 import org.apache.flume.source.http.HTTPBadRequestException;
 import org.apache.flume.source.http.HTTPSourceHandler;
 import org.eclipse.jetty.server.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HttpSourcePostFileHanlder implements HTTPSourceHandler {
+public class HttpSourcePostFileHanlder extends AbstractSource implements HTTPSourceHandler {
 	private static Logger LOG = LoggerFactory.getLogger(HttpSourcePostFileHanlder.class);
 	private static final MultipartConfigElement MULTI_PART_CONFIG = new MultipartConfigElement(System.getProperty("java.io.tmpdir"));
+	//multipart中各文件的最大限制
+	private Integer limitFilesizeInMultipart;
+	
 	@Override
 	public void configure(Context context) {
-		
+		//单文件最大限制，默认30M
+		limitFilesizeInMultipart = context.getInteger("limitFilesizeInMultipart", 30*1024*1024);
+		LOG.info(String.format("limitFilesizeInMultipart = %s", limitFilesizeInMultipart));
 	}
 	
 	public static String md5(byte[] data) {
@@ -48,35 +53,42 @@ public class HttpSourcePostFileHanlder implements HTTPSourceHandler {
 	@Override
 	public List<Event> getEvents(HttpServletRequest request) throws HTTPBadRequestException, Exception {
 		request.setAttribute(Request.__MULTIPART_CONFIG_ELEMENT, MULTI_PART_CONFIG);
-		List<Event> events = null;
+		List<Event> events = new ArrayList<Event>(1);
 		String contentType = request.getContentType();
-		LOG.debug(contentType);
 		
 		if(contentType != null && contentType.startsWith("multipart/")) {
+			//若为表单上传，则依次处理文件
 			Collection<Part> parts = request.getParts();
-			events = new ArrayList<Event>(parts.size());
+			LOG.info(String.format("multipart num: %s", parts.size()));
+			int bufferSize = 4096;
 			for (Part part : parts) {
-			    int l = (int) part.getSize();
+			    int filesize = (int) part.getSize();
+			    if(filesize > limitFilesizeInMultipart) {
+			    	LOG.warn(String.format("file too large , ignore it, part name = %s, size = %s", part.getName(), filesize));
+			    	continue;
+			    }
 			    InputStream input = part.getInputStream();
 			    
-				ByteArrayOutputStream out = new ByteArrayOutputStream(l);
-                byte[] doc = new byte[512];
+				ByteArrayOutputStream out = new ByteArrayOutputStream(filesize);
+                byte[] t = new byte[bufferSize];
                 int n;
                 //若没有读到，即读取到末尾，则返回-1
-                while((n=input.read(doc,0,512))!=-1)
+                while((n=input.read(t,0,bufferSize))!=-1)
                 {
                     //这就把读取到的n个字节全部都写入到指定路径了
-                    out.write(doc,0,n);
+                    out.write(t,0,n);
                 }
-                byte[] bb = out.toByteArray();
-//                LOG.debug(md5(bb));
-			    events.add(EventBuilder.withBody(bb));
+                byte[] fileContent = out.toByteArray();
+                LOG.info(String.format("part name = %s, size = %s, md5 = %s", part.getName(), filesize, md5(fileContent)));
+			    events.add(EventBuilder.withBody(fileContent));
 			}
 		}else {
-			Enumeration<String> e = request.getParameterNames();
-			while(e.hasMoreElements()) {
-				LOG.info("no multipart: ", e.nextElement());
-			}
+			LOG.warn(String.format("abnormal request, host = %s, contentType = %s, url = %s", request.getRemoteHost(), contentType, request.getRequestURI()));
+			
+//			Enumeration<String> e = request.getParameterNames();
+//			while(e!=null && e.hasMoreElements()) {
+//				LOG.warn("no multipart: ", e.nextElement());
+//			}
 		}
 		return events;
 	}

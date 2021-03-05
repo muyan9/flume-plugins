@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/flume-ng-configuration-1.9.0.jar"/>
+	<classpathentry kind="lib" path="lib/flume-ng-configuration-1.9.0.jar" sourcepath="D:/dev/java_source/apache-flume-1.9.0-src/flume-ng-configuration/src/main/java/org/apache/flume"/>
 	<classpathentry kind="lib" path="lib/flume-ng-core-1.9.0.jar" sourcepath="D:/dev/java_source/apache-flume-1.9.0-src"/>
 	<classpathentry kind="lib" path="lib/flume-ng-sdk-1.9.0.jar"/>
 	<classpathentry kind="lib" path="lib/jsp-api.jar"/>
@@ -12,6 +12,5 @@
 	<classpathentry kind="lib" path="lib/jetty-servlets-9.4.18.v20190429.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-servlet-9.4.18.v20190429.jar"/>
 	<classpathentry kind="lib" path="lib/jetty-server-9.4.18.v20190429.jar"/>
-	<classpathentry kind="lib" path="lib/flume-ng-hbase2-sink-1.9.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
