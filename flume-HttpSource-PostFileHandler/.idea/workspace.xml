@@ -1,29 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="flume-HttpSource-PostFileHandler" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="206b61e5-a574-4adb-b470-76a1f396b20a" name="Default Changelist" comment="">
+    <list default="true" id="206b61e5-a574-4adb-b470-76a1f396b20a" name="Default Changelist" comment="切换为使用idea开发，增加文件大小限制参数">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/flume_HttpSource_PostFileHandler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../flumg-pgsql-sink/flumg-pgsql-sink.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../flume-HttpPostFile-sink/dist/flume-HttpPostFile2Interface-sink.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../flume-HttpPostFile-sink/dist/flume-HttpPostFile2Interface-sink.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/export.jardesc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/flume-HttpSource-PostFileHandler.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/readme.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/flume-ng-configuration-1.9.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/flume-ng-core-1.9.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/flume-ng-sdk-1.9.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jetty-http-9.4.18.v20190429.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jetty-io-9.4.18.v20190429.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jetty-server-9.4.18.v20190429.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jetty-servlet-9.4.18.v20190429.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jetty-servlets-9.4.18.v20190429.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jsp-api.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/servlet-api.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-1.6.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/slf4j-log4j12-1.6.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/zcy/flume/httpsource/handler/postfile/HttpSourcePostFileHanlder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cn/yplsec/flume/httpsource/handler/postfile/HttpSourcePostFileHanlder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../flume-mysql-sink/mysql-sink.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../flume-mysql-sink/pom.xml" beforeDir="false" />
     </list>
@@ -44,12 +33,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="D:/dev/apache-flume-1.9.0-bin/lib" />
-    <property name="project.structure.last.edited" value="Global Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\git\flume-plugins\flume-HttpSource-PostFileHandler\out\artifacts\flume_HttpSource_PostFileHandler" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
@@ -63,6 +56,14 @@
       <option name="presentableId" value="Default" />
       <updated>1615280986702</updated>
     </task>
+    <task id="LOCAL-00001" summary="切换为使用idea开发，增加文件大小限制参数">
+      <created>1615281391408</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1615281391408</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -76,5 +77,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="切换为使用idea开发，增加文件大小限制参数" />
+    <option name="LAST_COMMIT_MESSAGE" value="切换为使用idea开发，增加文件大小限制参数" />
   </component>
 </project>

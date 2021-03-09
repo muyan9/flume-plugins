@@ -1,0 +1,8 @@
+该组件扩展了flume的httpsource，仅用于接收POST已multipart形式的上传文件，并将整个文件作为一个event对象使用
+且支持多文件在同一个POST请求中上传
+
+后期会增加对于header属性的处理
+
+当前提供的参数：
+//限定每个传输文件的大小
+limitFilesizeInMultipart = 10000

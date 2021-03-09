@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="flume-HttpSource-PostFileHandler">
+    <output-path>$PROJECT_DIR$/out/artifacts/flume_HttpSource_PostFileHandler</output-path>
+    <root id="archive" name="flume-HttpSource-PostFileHandler.jar">
+      <element id="module-output" name="flume-HttpSource-PostFileHandler" />
+    </root>
+  </artifact>
+</component>
