@@ -6,13 +6,11 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="206b61e5-a574-4adb-b470-76a1f396b20a" name="Default Changelist" comment="切换为使用idea开发，增加文件大小限制参数">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/flume_HttpSource_PostFileHandler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme.txt" afterDir="false" />
+    <list default="true" id="206b61e5-a574-4adb-b470-76a1f396b20a" name="Default Changelist" comment="update">
       <change afterPath="$PROJECT_DIR$/../flumg-pgsql-sink/flumg-pgsql-sink.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../flume-HttpPostFile-sink/dist/flume-HttpPostFile2Interface-sink.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../flume-HttpPostFile-sink/dist/flume-HttpPostFile2Interface-sink.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/flume_HttpSource_PostFileHandler/test.conf" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/flume_HttpSource_PostFileHandler/test.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../flume-mysql-sink/mysql-sink.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../flume-mysql-sink/pom.xml" beforeDir="false" />
     </list>
@@ -63,7 +61,14 @@
       <option name="project" value="LOCAL" />
       <updated>1615281391408</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update">
+      <created>1615282989495</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1615282989495</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -80,6 +85,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="切换为使用idea开发，增加文件大小限制参数" />
-    <option name="LAST_COMMIT_MESSAGE" value="切换为使用idea开发，增加文件大小限制参数" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>
