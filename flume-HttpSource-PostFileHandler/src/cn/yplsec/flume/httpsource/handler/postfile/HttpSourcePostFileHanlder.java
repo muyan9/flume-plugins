@@ -1,38 +1,36 @@
-package zcy.flume.httpsource.handler.postfile;
+package cn.yplsec.flume.httpsource.handler.postfile;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import javax.servlet.MultipartConfigElement;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
 import org.apache.flume.Context;
 import org.apache.flume.Event;
-import org.apache.flume.conf.Configurable;
 import org.apache.flume.event.EventBuilder;
-import org.apache.flume.source.AbstractSource;
 import org.apache.flume.source.http.HTTPBadRequestException;
 import org.apache.flume.source.http.HTTPSourceHandler;
 import org.eclipse.jetty.server.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HttpSourcePostFileHanlder extends AbstractSource implements HTTPSourceHandler {
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+public class HttpSourcePostFileHanlder implements HTTPSourceHandler {
 	private static Logger LOG = LoggerFactory.getLogger(HttpSourcePostFileHanlder.class);
 	private static final MultipartConfigElement MULTI_PART_CONFIG = new MultipartConfigElement(System.getProperty("java.io.tmpdir"));
-	//multipart中各文件的最大限制
+	//multipart中单个文件的最大值限制
 	private Integer limitFilesizeInMultipart;
-	
-	@Override
+
 	public void configure(Context context) {
 		//单文件最大限制，默认30M
 		limitFilesizeInMultipart = context.getInteger("limitFilesizeInMultipart", 30*1024*1024);
 		LOG.info(String.format("limitFilesizeInMultipart = %s", limitFilesizeInMultipart));
 	}
-	
+
 	public static String md5(byte[] data) {
 		try {
 			MessageDigest m = MessageDigest.getInstance("MD5");
@@ -55,7 +53,7 @@ public class HttpSourcePostFileHanlder extends AbstractSource implements HTTPSou
 		request.setAttribute(Request.__MULTIPART_CONFIG_ELEMENT, MULTI_PART_CONFIG);
 		List<Event> events = new ArrayList<Event>(1);
 		String contentType = request.getContentType();
-		
+
 		if(contentType != null && contentType.startsWith("multipart/")) {
 			//若为表单上传，则依次处理文件
 			Collection<Part> parts = request.getParts();
@@ -68,7 +66,7 @@ public class HttpSourcePostFileHanlder extends AbstractSource implements HTTPSou
 			    	continue;
 			    }
 			    InputStream input = part.getInputStream();
-			    
+
 				ByteArrayOutputStream out = new ByteArrayOutputStream(filesize);
                 byte[] t = new byte[bufferSize];
                 int n;
@@ -79,16 +77,13 @@ public class HttpSourcePostFileHanlder extends AbstractSource implements HTTPSou
                     out.write(t,0,n);
                 }
                 byte[] fileContent = out.toByteArray();
-                LOG.info(String.format("part name = %s, size = %s, md5 = %s", part.getName(), filesize, md5(fileContent)));
+                String sMd5OfPart = md5(fileContent);
+                LOG.info(String.format("fn = %s, size = %s, md5 = %s", part.getSubmittedFileName(), filesize, sMd5OfPart));
+                //todo: some header, fn, size, md5, datetime, batchno
 			    events.add(EventBuilder.withBody(fileContent));
 			}
 		}else {
 			LOG.warn(String.format("abnormal request, host = %s, contentType = %s, url = %s", request.getRemoteHost(), contentType, request.getRequestURI()));
-			
-//			Enumeration<String> e = request.getParameterNames();
-//			while(e!=null && e.hasMoreElements()) {
-//				LOG.warn("no multipart: ", e.nextElement());
-//			}
 		}
 		return events;
 	}
